@@ -1,4 +1,4 @@
 #! /bin/bash
 
-$var = "Rajesh"
+$var ="Rajesh"
 echo "Hello $var, welcome to shell scripting"
