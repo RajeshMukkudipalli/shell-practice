@@ -3,9 +3,9 @@
 userid=$(id -u)
 
 if [ $userid -ne 0 ]; then
-    echo "You are root user"
-else
     echo "You are not root user"
+else
+    echo "You are  root user"
 fi
 # this is a validation function
 validate() {
