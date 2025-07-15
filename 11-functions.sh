@@ -10,9 +10,9 @@ fi
 # this is a validation function
 validate() {
     if [ $1 -eq 0 ]; then
-        echo "Installing $2 is successful"
+        echo -e "\e[32m Installing $2 is successful"
     else
-        echo "Installing $2 is failed"
+        echo -e "\e[31m Installing $2 is failed"
         exit 1
     fi
 }
