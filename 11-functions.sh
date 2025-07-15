@@ -7,7 +7,7 @@ if [ $userid -ne 0 ]; then
 else
     echo "You are not root user"
 fi
-
+# this is a validation function
 validate() {
     if [ $1 -eq 0 ]; then
         echo "Installing $2 is successful"
