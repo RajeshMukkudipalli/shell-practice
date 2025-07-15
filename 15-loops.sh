@@ -12,3 +12,23 @@ validate() {
         exit 1
     fi
 }
+# Check if the user is root
+userid=$(id -u) 
+
+if [ $userid -ne 0 ]; then
+    echo "You are not root user"
+    exit 1
+else
+    echo "You are root user"
+fi
+# Loop through each item in the array  
+for item in "${items[@]}"; do
+    dnf list installed $item
+    if [ $? -ne 0 ]; then
+        echo "$item is not installed...proceeding with installation"
+        dnf install $item -y
+        validate $? "$item"
+    else
+        echo -e "\e[33m $item is already installed...nothing to do"
+    fi
+done
