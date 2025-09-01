@@ -63,6 +63,7 @@ if [ -n "$File" ]; then
     echo "Files found to be zipped: $File"
     timestamp=$(date +%F-%H-%M-%S)
     Zip_file="$backup_dir/log-backup-$timestamp.zip"
+    find $source_dir -name "*.log" -mtime +"$days" | zip -@ "$Zip_file"
 
     echo "$File" | zip "$Zip_file" -@
 
