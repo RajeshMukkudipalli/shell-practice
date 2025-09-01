@@ -21,16 +21,6 @@ else
     echo "You are  root user"
 fi
 
-usage(){
-
-    echo -e "$R sh back-up.sh <source_directory> <backup_directory> <days>$N"
-}
-
-if [ $# -lt 2 ]; then
-    usage
-    exit 1
-fi
-# this is a validation function
 validate() {
     if [ $1 -eq 0 ]; then
         echo -e "$G Installing $2 is successful"
@@ -39,3 +29,39 @@ validate() {
         exit 1
     fi
 }
+
+usage(){
+
+    echo -e "$R sh back-up.sh <source_directory> <backup_directory> <days>$N"
+}
+
+if [ ! -d $source_dir ]; then
+    echo -e "$R Source directory $source_dir does not exist $N"
+    usage
+    exit 1
+fi
+
+if [ ! -d $backup_dir ]; then
+    echo -e "$R Backup directory $backup_dir does not exist $N"
+    usage
+    exit 1
+fi
+
+if [ $# -lt 2 ]; then
+    usage
+    exit 1
+fi
+
+
+
+File=$(find $source_dir -name "*.log" -mtime +$days)
+
+if [ ! -z $File]
+then
+    echo " File found to be zip $File"
+    timestamp=$(date +%F-%H-%M-%S)
+    Zip_file="$backup_dir/log-backup-$timestamp.zip"
+    echo $File | zip $Zip_file -@
+else
+    echo -e "No log Files found older than 14 days.... $Y Skipping backup $N"
+fi
