@@ -62,6 +62,17 @@ then
     timestamp=$(date +%F-%H-%M-%S)
     Zip_file="$backup_dir/log-backup-$timestamp.zip"
     echo $File | zip $Zip_file -@
+    if [ -f $Zip_file ]; then
+        echo -e "$G Backup is successful and file is $Zip_file $N"
+        while IFS= read -r file
+        do
+            echo "Deleting file: $file"
+            rm -rf "$file"
+        done <<< "$File"
+        echo -e "log files lolder than $days days are deleted from $source_dir....."$G SUCCESS $N"
+    else
+        echo -e "$R Backup is failed $N"
+    fi
 else
     echo -e "No log Files found older than 14 days.... $Y Skipping backup $N"
 fi
