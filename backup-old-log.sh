@@ -17,13 +17,14 @@ N="\e[0m"
 
 mkdir -p "$log_folder"
 
-# Check user
-if [ "$userid" -ne 0 ]; then
-    echo -e "${R}You are not root user${N}"
-else
-    echo -e "${G}You are root user${N}"
-fi
-
+# Check user is logged in as root
+check_root() {
+    if [ "$userid" -ne 0 ]; then
+        echo -e "${R}You are not root user${N}"
+    else
+        echo -e "${G}You are root user${N}"
+    fi
+}
 validate() {
     if [ $1 -eq 0 ]; then
         echo -e "$G Installing $2 is successful $N"
