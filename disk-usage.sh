@@ -2,6 +2,9 @@
 
 Disk_usage=$(df -hT | grep -v Filesystem)
 disk_threshold=1
+Msg=""
+IP=$(hostname -I | awk '{print $1}')
+echo "Disk Usage on Server - $IP"
 
 while IFS= read -r line
 do 
